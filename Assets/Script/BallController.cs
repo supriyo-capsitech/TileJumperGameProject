@@ -1,19 +1,24 @@
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
     private Rigidbody ballrb;
-    
+
     public float jumpForce;
     public float gravityModifier; //
 
     public bool isOnGround = false;
     public bool isGameOver = false;
-    private float lowerBoundForGameOver = -4f;
+    private float lowerBoundForGameOver = -4f; //y
+    private float leftBoundForGameOver = -11f;  //x
 
     public GameObject GameOverUi;
-    
+
+    public int score = 0;
+    public TextMeshProUGUI scoreTMP;
+
     void Start()
     {
         ballrb = GetComponent<Rigidbody>();
@@ -29,16 +34,16 @@ public class BallController : MonoBehaviour
         //     Debug.Log("changes in x position of ball !!!!!!!!");
         // }
 
-        if(ballrb.transform.position.y < lowerBoundForGameOver)
+        if (ballrb.transform.position.y < lowerBoundForGameOver || ballrb.transform.position.x < leftBoundForGameOver)
         {
             isGameOver = true;
             GameOverUi.SetActive(true);
-            
+
             // Debug.Log("game over!");
         }
-        
-        
-        
+
+
+
 
 
         //fr mobile
@@ -50,7 +55,7 @@ public class BallController : MonoBehaviour
             {
                 jump();
                 isOnGround = false;
-                Debug.Log("jump");
+                // Debug.Log("jump");
             }
         }
 
@@ -62,6 +67,17 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.CompareTag("Tile"))
         {
             isOnGround = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Debug.Log("score");
+            score += 1;
+            scoreTMP.text = "Score : " + score.ToString();
+
         }
     }
 

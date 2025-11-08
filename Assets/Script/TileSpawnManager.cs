@@ -1,20 +1,22 @@
+
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class TileSpawnManager : MonoBehaviour
 {
     public GameObject tilePrefab;
+    public GameObject collectiblesPrefab;
 
-    public float startDelay = 0f;
-    public float repeatDelay = 3.0f;
-
-    // public Vector3 tileSpawnPos = new Vector3(35, 0, 0);
+    private float startDelay = 0f;
+    private float repeatDelay = 2.0f;
 
     //range of random y
     private float minY = -1f;
     private float maxY = 2f;
 
-    private BallController ballControllerScript; // gameover
+    private float collectibleOffsetY = 1.0f; //coin above dist
+
+    private BallController ballControllerScript; // to get gameover bool
 
 
 
@@ -23,7 +25,7 @@ public class TileSpawnManager : MonoBehaviour
     {
         ballControllerScript = GameObject.Find("Ball").GetComponent<BallController>();
 
-        InvokeRepeating("SpawnTile", startDelay, repeatDelay);
+        InvokeRepeating("SpawnTileAndCollectibles", startDelay, repeatDelay);
 
     }
 
@@ -34,16 +36,25 @@ public class TileSpawnManager : MonoBehaviour
 
     }
 
-    void SpawnTile()
+    void SpawnTileAndCollectibles()
     {
-        float randomY = Random.Range(minY, maxY);
+        float randomY = GetRandomY();
+
+        // float randomY = Random.Range(minY, maxY);
         Vector3 tileSpawnPos = new Vector3(35, randomY, 0);
+        Vector3 collectiblePos = new Vector3(tileSpawnPos.x, tileSpawnPos.y + collectibleOffsetY, tileSpawnPos.z);
 
         if (ballControllerScript.isGameOver == false)
         {
             Instantiate(tilePrefab, tileSpawnPos, tilePrefab.transform.rotation);
+            Instantiate(collectiblesPrefab, collectiblePos, collectiblesPrefab.transform.rotation);
 
         }
 
+    }
+
+    float GetRandomY()
+    {
+        return Random.Range(minY, maxY);
     }
 }
