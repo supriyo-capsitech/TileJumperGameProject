@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public int scoreValue = 0;
-    
+
+    // public Vector3 rotationalSpeed = new Vector3(0, 100, 0);
+
     void Start()
     {
-        
+
     }
 
     void Update()
     {
+        // transform.Rotate(rotationalSpeed * Time.deltaTime);
+         
+
 
     }
 
@@ -19,7 +23,6 @@ public class Collectible : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             Destroy(gameObject);
-            scoreValue += 1;
         }
     }
 }

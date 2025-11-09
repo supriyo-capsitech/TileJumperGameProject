@@ -19,9 +19,20 @@ public class BallController : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreTMP;
 
+    //audio
+    private AudioSource coinCollect;
+    private AudioSource gameOverSound;
+    private bool isGameOverSoundPlayed = false;
+
+
     void Start()
     {
         ballrb = GetComponent<Rigidbody>();
+
+        // coinCollect = GetComponent<AudioSource>();
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        coinCollect = audioSources[0];
+        gameOverSound = audioSources[1];
     }
 
     // Update is called once per frame
@@ -38,9 +49,17 @@ public class BallController : MonoBehaviour
         {
             isGameOver = true;
             GameOverUi.SetActive(true);
+            // gameOverSound.Play();
+            if(!isGameOverSoundPlayed){
+                gameOverSound.Play();
+                isGameOverSoundPlayed = true;
+            }
 
             // Debug.Log("game over!");
         }
+
+        //roll
+        // transform.Rotate(Vector3.right, 100f * Time.deltaTime);
 
 
 
@@ -74,6 +93,7 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
+            coinCollect.Play();
             Debug.Log("score");
             score += 1;
             scoreTMP.text = "Score : " + score.ToString();

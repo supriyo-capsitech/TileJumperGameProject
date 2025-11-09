@@ -39,10 +39,11 @@ public class TileSpawnManager : MonoBehaviour
     void SpawnTileAndCollectibles()
     {
         float randomY = GetRandomY();
+        float collectibleOffsetX = Random.Range(-3f,3f);
 
         // float randomY = Random.Range(minY, maxY);
         Vector3 tileSpawnPos = new Vector3(35, randomY, 0);
-        Vector3 collectiblePos = new Vector3(tileSpawnPos.x, tileSpawnPos.y + collectibleOffsetY, tileSpawnPos.z);
+        Vector3 collectiblePos = new Vector3(tileSpawnPos.x+ collectibleOffsetX, tileSpawnPos.y + collectibleOffsetY, tileSpawnPos.z);
 
         if (ballControllerScript.isGameOver == false)
         {
@@ -53,8 +54,10 @@ public class TileSpawnManager : MonoBehaviour
 
     }
 
-    float GetRandomY()
+    float GetRandomY()  //for tile y
     {
         return Random.Range(minY, maxY);
     }
+
+
 }
