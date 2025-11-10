@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public int scoreValue = 0;
+    // public int scoreValue = 0;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,7 +21,7 @@ public class Collectible : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             Destroy(gameObject);
-            scoreValue += 1;
+            // scoreValue += 1;
         }
     }
 }
