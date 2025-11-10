@@ -24,5 +24,10 @@ public class GameOverManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+
+
+    
+    
     
 }

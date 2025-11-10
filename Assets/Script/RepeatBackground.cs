@@ -4,7 +4,26 @@ using UnityEngine;
 
 public class Repeatbackground : MonoBehaviour
 {
-    
+    // private Vector3 startPos;
+    // private float repeatWidth;
+
+
+    // void Start()
+    // {
+    //     startPos = transform.position;
+    //     // repeatWidth = GetComponent<BoxCollider>().size.x / 2;
+    //     repeatWidth = GetComponent<BoxCollider>().size.x;
+
+    // }
+
+    // void Update()
+    // {
+    //     if (transform.position.x < startPos.x - repeatWidth)
+    //     {
+    //         transform.position = startPos;
+    //     }
+    // }
+
     public float loopSpeed;
     public Renderer bgRenderer;
 
