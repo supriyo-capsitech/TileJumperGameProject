@@ -7,7 +7,7 @@ public class BallController : MonoBehaviour
     private Rigidbody ballrb;
 
     public float jumpForce;
-    public float gravityModifier; //
+    // public float gravityModifier; //
 
     public bool isOnGround = false;
     public bool isGameOver = false;
@@ -24,6 +24,8 @@ public class BallController : MonoBehaviour
     private AudioSource gameOverSound;
     private bool isGameOverSoundPlayed = false;
 
+    private float rotationSpeed = 200f;
+
     void Start()
     {
         ballrb = GetComponent<Rigidbody>();
@@ -36,6 +38,8 @@ public class BallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
 
         //fixing the x position change issue
         // if (ballrb.transform.position.x < 0 || ballrb.transform.position.x > 0)
@@ -79,7 +83,7 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Tile"))
+        if (collision.gameObject.CompareTag("Tile") || collision.gameObject.CompareTag("Tile1") || collision.gameObject.CompareTag("Tile2") || collision.gameObject.CompareTag("Tile3"))
         {
             isOnGround = true;
         }
