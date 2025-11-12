@@ -43,8 +43,7 @@ public class TileSpawnManager : MonoBehaviour
 
     void Update()
     {
-
-
+        
     }
 
     void SpawnTileAndCollectibles()
@@ -105,7 +104,7 @@ public class TileSpawnManager : MonoBehaviour
             if (canSpawn)
             {
                 SpawnTileAndCollectibles();
-                canSpawn = false;
+                canSpawn = false;   
                 yield return new WaitForSeconds(nextSpawnDelay);
                 canSpawn = true;
             }
